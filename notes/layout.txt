@@ -1,0 +1,74 @@
+
+Meal Display
+- Use image preview (add /preview to end of url)
+*-------------------------------------------*
+|            | IMG |  Meal Name             |
+|              Meal Category                |
+|     [Set Favorite]    [Start cooking]     |
+|  Meal Prep Instructions     Ingredients   |
+|   xxxxxxxxxxxx               |-------|    |
+|   xxxxxxxxxxxx               |-------|    |
+|   xxxxxxxxxxxx               |-------|    |
+|   xxxxxxxxxxxx               |-------|    |
+|                                           |
+|          Youtube Vid (if avail)           |
+*-------------------------------------------*
+
+Homepage
+*-------------------------------------------*
+|                 Title                     |
+|                                           |
+|                                           |
+|             Saved Meal List               |
+|                                           |
+|       Find a               Find a         |
+|     Random Meal        specific meal      |
+|                                           |
+|                                           |
+|                                           |
+*-------------------------------------------*
+> Find a random meal will open meal display with a random meal
+www.themealdb.com/api/json/v1/1/random.php
+> Find a specific meal will open search options
+
+Find a specific meal
+- Search Parameters: Space is replaced by _ (underscore)
+- Meal name search is www.themealdb.com/api/json/v1/1/search.php?s="name"
+  > Not by first letter
+
+Results to be found directly from this page (search the api) to save to state
+*-------------------------------------------*
+|             Meal Search                   |
+|                                           |
+|     Meal Name (Search Input)              |
+|                                           |
+|    List of main meal types                |
+|                                           |
+|    List of country types                  |
+|                                           |
+|    List of main Ingredients types         |
+|                                           |
+*-------------------------------------------*
+
+Meal display list
+- Show results in this format, click name or image to go to meal display
+> Maybe add a button on side of name to directly save Instructions
+> Save results so that they can go back and not have to search again
+
+
+- Saved meal list will follow the same format as Secondary Search page - listing the favorites instead.
+- Will need to have a button to remove from favorites....
+*-------------------------------------------*
+|  *-----*                                  |
+|  |Image|                                  |
+|  *-----*                                  |
+|   Name                                    |
+|                                           |
+|                                           |
+|                                           |
+|                                           |
+|                                           |
+|                                           |
+*-------------------------------------------*
+
+
