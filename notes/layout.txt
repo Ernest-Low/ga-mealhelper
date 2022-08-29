@@ -1,21 +1,33 @@
+Projectname: Mealhelper (?)
+
+Header (Top bar that is always present)
+- Title (Home navigation)
+- Random Meal
+- Search Index
+- Favorites
+- Meal Prep
+
 
 Meal Display
 - Use image preview (add /preview to end of url)
+- Meal prep instructions are seperated by \r\n
 *-------------------------------------------*
+|                                           |
 |            | IMG |  Meal Name             |
 |              Meal Category                |
 |     [Set Favorite]    [Start cooking]     |
-|  Meal Prep Instructions     Ingredients   |
-|   xxxxxxxxxxxx               |-------|    |
-|   xxxxxxxxxxxx               |-------|    |
-|   xxxxxxxxxxxx               |-------|    |
-|   xxxxxxxxxxxx               |-------|    |
+|  Ingredients       Meal Prep instructions |
+|   |------|         xxxxxxxxxxxxxxxxxxxxxx |
+|   |------|         xxxxxxxxxxxxxxxxxxxxxx |
+|   |------|         xxxxxxxxxxxxxxxxxxxxxx |
+|   |------|         xxxxxxxxxxxxxxxxxxxxxx |
 |                                           |
 |          Youtube Vid (if avail)           |
 *-------------------------------------------*
 
 Homepage
 *-------------------------------------------*
+|                                           |
 |                 Title                     |
 |                                           |
 |                                           |
@@ -38,6 +50,7 @@ Find a specific meal
 
 Results to be found directly from this page (search the api) to save to state
 *-------------------------------------------*
+|                                           |
 |             Meal Search                   |
 |                                           |
 |     Meal Name (Search Input)              |
@@ -59,6 +72,7 @@ Meal display list
 - Saved meal list will follow the same format as Secondary Search page - listing the favorites instead.
 - Will need to have a button to remove from favorites....
 *-------------------------------------------*
+|                                           |
 |  *-----*                                  |
 |  |Image|                                  |
 |  *-----*                                  |
