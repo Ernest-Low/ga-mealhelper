@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { Recipetype } from "../interfaces";
 
-const Homepage = (props: { recipe: Recipetype }) => {
-  const { recipe } = props;
+const Homepage = (props: { recipe: Recipetype; randomizemeal: () => void }) => {
+  const { recipe, randomizemeal } = props;
   const navigate = useNavigate();
 
   const navigating = () => {
@@ -72,6 +72,7 @@ const Homepage = (props: { recipe: Recipetype }) => {
           }}
         >
           <button
+            onClick={randomizemeal}
             style={{
               padding: "1rem 1.5rem",
               backgroundColor: "lightblue",

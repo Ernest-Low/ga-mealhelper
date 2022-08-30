@@ -12,9 +12,9 @@ const saveRecipe = (obj: Jsontype) => {
     const ingre: any = `strIngredient${i}`;
     const stringre: keyof typeof obj.meals[0] = ingre;
     if (stringre != "idMeal") {
-      const result = obj.meals[0][stringre].trim();
-      if (result != "") {
-        ingredients.push(result);
+      const result = obj.meals[0][stringre];
+      if (result != "" && result != null) {
+        ingredients.push(result.trim());
         const meas: any = `strMeasure${i}`;
         const strmeas: keyof typeof obj.meals[0] = meas;
         if (strmeas != "idMeal") {

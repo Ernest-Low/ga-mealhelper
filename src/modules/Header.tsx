@@ -1,6 +1,9 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
-const Header = () => {
+const Header = (props: { randomizemeal: () => void }) => {
+  const { randomizemeal } = props;
+  const navigate = useNavigate();
+
   return (
     <>
       {/* Header cover */}
@@ -16,14 +19,40 @@ const Header = () => {
       >
         {/* Home holder div */}
         <div style={{ width: "20%" }}>
-          <Link to="/" style={{ margin: "0px 30px" }}>
+          <button
+            onClick={() => navigate("/")}
+            style={{
+              backgroundColor: "rgba(0,0,0,0)",
+              border: "none",
+              margin: "0px 30px",
+              padding: "0.3rem 0.8rem",
+            }}
+          >
             Home
-          </Link>
+          </button>
+
+          {/* <Link to="/" style={{ margin: "0px 30px" }}>
+            Home
+          </Link> */}
         </div>
 
         <div style={{ width: "80%" }}>
           {/* Temporary Meal Display visible */}
-          <Link to="/mealdisplay">Meal</Link>
+          {/* <Link to="/mealdisplay">Meal</Link> */}
+          <button
+            onClick={() => {
+              randomizemeal();
+              navigate("/mealdisplay");
+            }}
+            style={{
+              backgroundColor: "rgba(0,0,0,0)",
+              border: "none",
+              margin: "0px 30px",
+              padding: "0.3rem 0.8rem",
+            }}
+          >
+            Random Meal
+          </button>
         </div>
       </div>
       <Outlet />
