@@ -1,4 +1,4 @@
-import { Recipetype, Jsontype } from "../interfaces";
+import { Jsontype } from "../interfaces";
 import saveRecipe from "./saveRecipe";
 
 const randomrecipe = () => {
@@ -7,10 +7,10 @@ const randomrecipe = () => {
       "https://www.themealdb.com/api/json/v1/1/random.php"
     );
     const json: Jsontype = (await res.json()) as Jsontype;
+    console.log("random api call");
     console.dir(json);
     return saveRecipe(json);
   };
-
   const recipe = apicall();
   return recipe;
 };

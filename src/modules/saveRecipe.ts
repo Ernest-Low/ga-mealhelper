@@ -8,23 +8,19 @@ const saveRecipe = (obj: Jsontype) => {
   const ingredients: string[] = [];
   const ingmeasure: string[] = [];
 
-  interface StringMap {}
-
   for (let i = 1; i <= 20; i++) {
-    const ingre: any = "strIngredients" + i;
+    const ingre: any = `strIngredient${i}`;
     const stringre: keyof typeof obj.meals[0] = ingre;
     if (stringre != "idMeal") {
-      const result = obj.meals[0][stringre];
+      const result = obj.meals[0][stringre].trim();
       if (result != "") {
         ingredients.push(result);
-      }
-    }
-    const meas: any = "strIngredients" + i;
-    const strmeas: keyof typeof obj.meals[0] = meas;
-    if (strmeas != "idMeal") {
-      const result = obj.meals[0][strmeas];
-      if (result != "") {
-        ingmeasure.push(result);
+        const meas: any = `strMeasure${i}`;
+        const strmeas: keyof typeof obj.meals[0] = meas;
+        if (strmeas != "idMeal") {
+          const result2 = obj.meals[0][strmeas].trim();
+          ingmeasure.push(result2);
+        }
       }
     }
   }

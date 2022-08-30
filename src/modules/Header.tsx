@@ -1,23 +1,34 @@
-import { Outlet } from "react-router-dom"
+import { Outlet, Link } from "react-router-dom";
 
 const Header = () => {
-
-
-
-    return (
-
-        <div>
-            <a href="/">Home</a>
-            {/* Temporary Meal Display visible */}
-            <a href="/mealdisplay">Meal</a>
-
-
-
-
-<Outlet />
+  return (
+    <>
+      {/* Header cover */}
+      <div
+        style={{
+          backgroundColor: "#2F4F4F",
+          height: "40px",
+          color: "ghostwhite",
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+        }}
+      >
+        {/* Home holder div */}
+        <div style={{ width: "20%" }}>
+          <Link to="/" style={{ margin: "0px 30px" }}>
+            Home
+          </Link>
         </div>
-    )
-    
-}
 
-export default Header
+        <div style={{ width: "80%" }}>
+          {/* Temporary Meal Display visible */}
+          <Link to="/mealdisplay">Meal</Link>
+        </div>
+      </div>
+      <Outlet />
+    </>
+  );
+};
+
+export default Header;

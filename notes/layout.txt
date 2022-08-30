@@ -11,10 +11,11 @@ Header (Top bar that is always present)
 Meal Display
 - Use image preview (add /preview to end of url)
 - Meal prep instructions are seperated by \r\n
+- Try and make the favorite button a toggle (fav / unfav) with tailwind css
 *-------------------------------------------*
 |                                           |
-|            | IMG |  Meal Name             |
-|              Meal Category                |
+|         | IMG |  Meal Name                |
+|                Meal Category              |
 |     [Set Favorite]    [Start cooking]     |
 |  Ingredients       Meal Prep instructions |
 |   |------|         xxxxxxxxxxxxxxxxxxxxxx |
@@ -29,14 +30,14 @@ Homepage
 *-------------------------------------------*
 |                                           |
 |                 Title                     |
-|                                           |
-|                                           |
+|          *-------------------*            |
+|          |                   |            |
+|          |  Random Meal Img  |            |
+|          |                   |            |
+|          *-------------------*            |
 |             Saved Meal List               |
-|                                           |
 |       Find a               Find a         |
 |     Random Meal        specific meal      |
-|                                           |
-|                                           |
 |                                           |
 *-------------------------------------------*
 > Find a random meal will open meal display with a random meal
