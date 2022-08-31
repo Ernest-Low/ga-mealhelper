@@ -1,7 +1,7 @@
 import { Outlet, useNavigate } from "react-router-dom";
 
-const Header = (props: { randomizemeal: () => void }) => {
-  const { randomizemeal } = props;
+const Header = (props: { randomizemeal: () => void; favmeals: () => void }) => {
+  const { randomizemeal, favmeals } = props;
   const navigate = useNavigate();
 
   return (
@@ -42,7 +42,6 @@ const Header = (props: { randomizemeal: () => void }) => {
           <button
             onClick={() => {
               randomizemeal();
-              navigate("/mealdisplay");
             }}
             style={{
               backgroundColor: "rgba(0,0,0,0)",
@@ -52,6 +51,19 @@ const Header = (props: { randomizemeal: () => void }) => {
             }}
           >
             Random Meal
+          </button>
+          <button
+            onClick={() => {
+              favmeals();
+            }}
+            style={{
+              backgroundColor: "rgba(0,0,0,0)",
+              border: "none",
+              margin: "0px 30px",
+              padding: "0.3rem 0.8rem",
+            }}
+          >
+            Favorite Meals
           </button>
         </div>
       </div>

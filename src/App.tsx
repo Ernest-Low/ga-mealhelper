@@ -5,10 +5,13 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import Mealdisplay from "./pages/Mealdisplay";
 import randomrecipe from "./modules/randomrecipe";
 import Header from "./modules/Header";
+import Favoritepage from "./pages/Favoritepage";
+import Mealsearch from "./pages/Mealsearch";
 
 function App() {
   const [recipe, setrecipe] = useState<Recipetype>();
   const [favs, setfavs] = useState<Recipetype[]>([]);
+  const [displaylist, setdisplaylist] = useState<Recipetype[]>([]);
 
   const navigate = useNavigate();
 
@@ -38,12 +41,27 @@ function App() {
 
   const displayhomepage = () => {
     if (recipe) {
-      return <Homepage recipe={recipe} randomizemeal={randomizemeal} />;
+      return (
+        <Homepage
+          recipe={recipe}
+          randomizemeal={randomizemeal}
+          favmeals={favmeals}
+        />
+      );
     } else {
       <div>
         <h1>Loading</h1>
       </div>;
     }
+  };
+
+  const displayfavs = () => {
+    return <Favoritepage displaylist={displaylist} setrecipe={setrecipe} />;
+  };
+
+  const favmeals = () => {
+    setdisplaylist(structuredClone(favs));
+    navigate("/favorites");
   };
 
   const randomizemeal = () => {
@@ -81,10 +99,12 @@ function App() {
 
   return (
     <div>
-      <Header randomizemeal={randomizemeal} />
+      <Header randomizemeal={randomizemeal} favmeals={favmeals} />
       <Routes>
         <Route index element={displayhomepage()} />
         <Route path="mealdisplay" element={displaymeal()} />
+        <Route path="favorites" element={displayfavs()} />
+        <Route path="search" element={<Mealsearch setdisplaylist = {setdisplaylist}/>} />
       </Routes>
     </div>
   );
