@@ -1,24 +1,24 @@
-import { Recipetype, Jsontype } from "../interfaces";
+import { Recipetype, Jsonmeals } from "../interfaces";
 
 //  Save object (from meals) into recipe state
-const saveRecipe = (obj: Jsontype) => {
-  // strIngredient1: obj.meals[0].strIngredient1
-  // strMeasure1: obj.meals[0].strMeasure1
+const saveRecipe = (obj: Jsonmeals) => {
+  // strIngredient1: obj.strIngredient1
+  // strMeasure1: obj.strMeasure1
 
   const ingredients: string[] = [];
   const ingmeasure: string[] = [];
 
   for (let i = 1; i <= 20; i++) {
     const ingre: any = `strIngredient${i}`;
-    const stringre: keyof typeof obj.meals[0] = ingre;
+    const stringre: keyof typeof obj = ingre;
     if (stringre != "idMeal") {
-      const result = obj.meals[0][stringre];
+      const result = obj[stringre];
       if (result != "" && result != null) {
         ingredients.push(result.trim());
         const meas: any = `strMeasure${i}`;
-        const strmeas: keyof typeof obj.meals[0] = meas;
+        const strmeas: keyof typeof obj = meas;
         if (strmeas != "idMeal") {
-          const result2 = obj.meals[0][strmeas].trim();
+          const result2 = obj[strmeas].trim();
           ingmeasure.push(result2);
         }
       }
@@ -26,16 +26,19 @@ const saveRecipe = (obj: Jsontype) => {
   }
 
   const returnobj: Recipetype = {
-    idMeal: obj.meals[0].idMeal,
-    strMeal: obj.meals[0].strMeal,
-    strCategory: obj.meals[0].strCategory,
-    strArea: obj.meals[0].strArea,
-    strInstructions: obj.meals[0].strInstructions,
-    strMealThumb: obj.meals[0].strMealThumb,
-    strYoutube: obj.meals[0].strYoutube,
+    idMeal: obj.idMeal,
+    strMeal: obj.strMeal,
+    strCategory: obj.strCategory,
+    strArea: obj.strArea,
+    strInstructions: obj.strInstructions,
+    strMealThumb: obj.strMealThumb,
+    strYoutube: obj.strYoutube,
     arringredients: ingredients,
     arrmeasure: ingmeasure,
   };
+
+
+
 
   return returnobj;
 };

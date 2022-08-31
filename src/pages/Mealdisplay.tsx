@@ -24,14 +24,17 @@ const Mealdisplay = (props: { recipe: Recipetype; favbutton: () => void }) => {
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
+            alignContent: "center",
             margin: "1.5rem",
           }}
         >
           {/* Img Preview */}
-          <img
-            src={`${recipe.strMealThumb}/preview`}
-            style={{ margin: "1rem" }}
-          ></img>
+          <div style={{ maxWidth: "15%", maxHeight: "15%", margin: "0 1rem 0 3rem" }}>
+            <img
+              src={`${recipe.strMealThumb}`}
+              style={{ margin: "1rem" }}
+            ></img>
+          </div>
           {/* Right side container */}
           <div style={{ display: "flex", flexDirection: "column" }}>
             {/* Meal Name Container */}

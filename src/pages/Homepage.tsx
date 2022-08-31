@@ -9,8 +9,12 @@ const Homepage = (props: {
   const { recipe, randomizemeal, favmeals } = props;
   const navigate = useNavigate();
 
-  const navigating = () => {
+  const navigatemeal = () => {
     navigate("/mealdisplay");
+  };
+
+  const navigatesearch = () => {
+    navigate("/search");
   };
 
   return (
@@ -24,7 +28,7 @@ const Homepage = (props: {
       {/* Random Image */}
       <div>
         <div
-          onClick={navigating}
+          onClick={navigatemeal}
           style={{
             backgroundImage: `url(${recipe.strMealThumb})`,
             height: "350px",
@@ -36,7 +40,7 @@ const Homepage = (props: {
         ></div>
         <div style={{ textAlign: "center" }}>
           <h2
-            onClick={navigating}
+            onClick={navigatemeal}
             className="font-bold italic"
             style={{ fontSize: "1.2rem", fontFamily: "Yeseva" }}
           >
@@ -51,6 +55,7 @@ const Homepage = (props: {
         }}
       >
         <button
+          className="text-1xl font-bold"
           onClick={favmeals}
           style={{
             padding: "1rem 1.5rem",
@@ -77,6 +82,7 @@ const Homepage = (props: {
           }}
         >
           <button
+            className="text-1xl font-bold"
             onClick={randomizemeal}
             style={{
               padding: "1rem 1.5rem",
@@ -94,6 +100,8 @@ const Homepage = (props: {
           }}
         >
           <button
+            className="text-1xl font-bold"
+            onClick={navigatesearch}
             style={{
               padding: "1rem 1.5rem",
               backgroundColor: "lightblue",

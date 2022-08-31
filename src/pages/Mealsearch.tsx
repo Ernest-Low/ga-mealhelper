@@ -1,11 +1,15 @@
 import { useEffect, useRef, useState } from "react";
-import { Jsontype, Recipetype } from "../interfaces";
+import { Jsontype, Recipetype, ShortJsontype } from "../interfaces";
 import saveRecipe from "../modules/saveRecipe";
+import Displaylist from "./Displaylist";
+import lookupid from "../modules/lookupid";
 
 const Mealsearch = (props: {
+  setrecipe: (type: Recipetype) => void;
+  displaylist: Recipetype[];
   setdisplaylist: (type: Recipetype[]) => void;
 }) => {
-  const { setdisplaylist } = props;
+  const { setrecipe, displaylist, setdisplaylist } = props;
 
   const [searchcat, setsearchcat] = useState<string[]>(["Any"]);
   const [searcharea, setsearcharea] = useState<string[]>(["Any"]);
@@ -47,12 +51,11 @@ const Mealsearch = (props: {
       const searchvalue = namesearch.current?.value.trim();
       console.log(namesearch.current?.value);
       const apicall = async () => {
-        console.log("Api call for Category");
         const res = await fetch(
           `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchvalue}`
         );
         const json: Jsontype = (await res.json()) as Jsontype;
-        // const jsonarray = json.meals.map((obj)=> )
+        setdisplaylist(json.meals.map((obj) => saveRecipe(obj)));
       };
       apicall();
     }
@@ -63,6 +66,55 @@ const Mealsearch = (props: {
     console.log(selectedcat);
     console.log("Radio for Area");
     console.log(selectedarea);
+
+    if (selectedcat == "Any" && selectedarea == "Any") {
+      alert(
+        "Cannot search 'Any' Category + 'Any' Country!\nPlease use the Random Recipe instead"
+      );
+    } else if (selectedcat != "Any") {
+      const apicall = async () => {
+        const res = await fetch(
+          `https://www.themealdb.com/api/json/v1/1/filter.php?c=${selectedcat}`
+        );
+        const shortjson: ShortJsontype = (await res.json()) as ShortJsontype;
+        const json = await Promise.all(
+          shortjson.meals.map((obj) => lookupid(obj))
+        );
+        if (selectedarea != "Any") {
+          setdisplaylist(json.filter((obj) => obj.strArea == selectedarea));
+        } else {
+          setdisplaylist(json);
+        }
+      };
+      apicall();
+    } else {
+      const apicall = async () => {
+        const res = await fetch(
+          `https://www.themealdb.com/api/json/v1/1/filter.php?a=${selectedarea}`
+        );
+        const shortjson: ShortJsontype = (await res.json()) as ShortJsontype;
+        const json = await Promise.all(
+          shortjson.meals.map((obj) => lookupid(obj))
+        );
+        setdisplaylist(json);
+      };
+      apicall();
+    }
+  };
+
+  const displaycheck = () => {
+    if (displaylist.length == 0) {
+      return (
+        <div style={{ textAlign: "center", margin: "3rem" }}>
+          <h1 className="text-3xl font-bold">No results yet</h1>
+          <h3 className="text-1xl font-bold">
+            Use the above settings to find some!
+          </h3>{" "}
+        </div>
+      );
+    } else {
+      return <Displaylist displaylist={displaylist} setrecipe={setrecipe} />;
+    }
   };
 
   return (
@@ -142,7 +194,7 @@ const Mealsearch = (props: {
         </div>
         {/* Search by Area (Radio) */}
         <div>
-          <h3 className="font-bold">Search Option (Area)</h3>
+          <h3 className="font-bold">Search Option (Nationality)</h3>
           <div>
             <div
               style={{
@@ -185,6 +237,7 @@ const Mealsearch = (props: {
       >
         Search Options
       </button>
+      <div>{displaycheck()}</div>
     </div>
   );
 };

@@ -104,7 +104,7 @@ function App() {
         <Route index element={displayhomepage()} />
         <Route path="mealdisplay" element={displaymeal()} />
         <Route path="favorites" element={displayfavs()} />
-        <Route path="search" element={<Mealsearch setdisplaylist = {setdisplaylist}/>} />
+        <Route path="search" element={<Mealsearch setrecipe = {setrecipe} displaylist = {displaylist} setdisplaylist = {setdisplaylist}/>} />
       </Routes>
     </div>
   );

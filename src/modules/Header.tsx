@@ -37,7 +37,19 @@ const Header = (props: { randomizemeal: () => void; favmeals: () => void }) => {
         </div>
 
         <div style={{ width: "80%" }}>
-          {/* Temporary Meal Display visible */}
+          <button
+            onClick={() => {
+              navigate("/search");
+            }}
+            style={{
+              backgroundColor: "rgba(0,0,0,0)",
+              border: "none",
+              margin: "0px 30px",
+              padding: "0.3rem 0.8rem",
+            }}
+          >
+            Specific Meal
+          </button>
           {/* <Link to="/mealdisplay">Meal</Link> */}
           <button
             onClick={() => {

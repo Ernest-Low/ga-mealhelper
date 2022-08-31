@@ -70,3 +70,13 @@ export interface Jsonmeals {
   strCreativeCommonsConfirmed: string;
   dateModified: string;
 }
+
+export interface ShortJsonmeals {
+  strMeal: string;
+  strMealThumb: string;
+  idMeal: string;
+}
+
+export interface ShortJsontype {
+  meals: ShortJsonmeals[];
+}

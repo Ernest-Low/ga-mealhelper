@@ -1,6 +1,10 @@
 import { Recipetype } from "../interfaces";
 import { useNavigate } from "react-router-dom";
 
+
+//  Try to learn usecontext to push displaylist & setrecipe to displaylist directly
+//* Currently prop drilling from Favoritepage and Mealsearch
+
 const Displaylist = (props: {
   displaylist: Recipetype[];
   setrecipe: (type: Recipetype) => void;
@@ -34,7 +38,7 @@ const Displaylist = (props: {
               flexDirection: "column",
               alignItems: "center",
               boxShadow: "0.3rem 0.3rem #6495ED",
-              minWidth: "18rem",
+              width: "18rem",
             }}
           >
             <div
@@ -43,18 +47,18 @@ const Displaylist = (props: {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                margin: "1rem 0 0 0",
+                margin: "1rem 1rem 0 1rem",
               }}
             >
               <img
-                src={`${obj.strMealThumb}/preview`}
+                src={`${obj.strMealThumb}`}
                 onClick={() => {
                   setrecipe(structuredClone(obj));
                   navigate("/mealdisplay");
                 }}
                 style={{
                   margin: "1rem",
-                  height: "100%",
+                  width: "100%",
                   display: "inline-block",
                 }}
               ></img>
