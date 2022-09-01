@@ -1,11 +1,20 @@
 import { Recipetype } from "../interfaces";
+import { useNavigate } from "react-router-dom";
 
-const Mealdisplay = (props: { recipe: Recipetype; favbutton: () => void }) => {
-  const { recipe, favbutton } = props;
-
+const Mealdisplay = (props: {
+  recipe: Recipetype;
+  favbutton: () => void;
+  setprep: (type: Recipetype) => void;
+}) => {
+  const { recipe, favbutton, setprep } = props;
   const instructions = recipe.strInstructions.split(`\r\n`);
-
   const embedurl = recipe.strYoutube.slice(32);
+  const navigate = useNavigate();
+
+  const mealprepping = () => {
+    setprep(structuredClone(recipe));
+    navigate("/mealprep");
+  };
 
   return (
     // Main container Div
@@ -29,7 +38,13 @@ const Mealdisplay = (props: { recipe: Recipetype; favbutton: () => void }) => {
           }}
         >
           {/* Img Preview */}
-          <div style={{ maxWidth: "15%", maxHeight: "15%", margin: "0 1rem 0 3rem" }}>
+          <div
+            style={{
+              maxWidth: "15%",
+              maxHeight: "15%",
+              margin: "0 1rem 0 3rem",
+            }}
+          >
             <img
               src={`${recipe.strMealThumb}`}
               style={{ margin: "1rem" }}
@@ -72,6 +87,7 @@ const Mealdisplay = (props: { recipe: Recipetype; favbutton: () => void }) => {
               }}
             >
               <button
+                className="hover:opacity-50"
                 style={{
                   padding: "0px 20px",
                   backgroundColor: "#FF1493",
@@ -85,6 +101,8 @@ const Mealdisplay = (props: { recipe: Recipetype; favbutton: () => void }) => {
                 Favorite
               </button>
               <button
+              className="hover:opacity-50"
+                onClick={mealprepping}
                 style={{
                   padding: "0.3rem 0.75rem",
                   backgroundColor: "#483D8B",

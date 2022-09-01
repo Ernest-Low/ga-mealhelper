@@ -55,7 +55,7 @@ const Homepage = (props: {
         }}
       >
         <button
-          className="text-1xl font-bold"
+          className="text-1xl font-bold hover:opacity-50"
           onClick={favmeals}
           style={{
             padding: "1rem 1.5rem",
@@ -82,7 +82,7 @@ const Homepage = (props: {
           }}
         >
           <button
-            className="text-1xl font-bold"
+            className="text-1xl font-bold hover:opacity-50"
             onClick={randomizemeal}
             style={{
               padding: "1rem 1.5rem",
@@ -100,7 +100,7 @@ const Homepage = (props: {
           }}
         >
           <button
-            className="text-1xl font-bold"
+            className="text-1xl font-bold hover:opacity-50"
             onClick={navigatesearch}
             style={{
               padding: "1rem 1.5rem",

@@ -106,7 +106,7 @@ const Mealsearch = (props: {
     if (displaylist.length == 0) {
       return (
         <div style={{ textAlign: "center", margin: "3rem" }}>
-          <h1 className="text-3xl font-bold">No results yet</h1>
+          <h1 className="text-3xl font-bold">No results</h1>
           <h3 className="text-1xl font-bold">
             Use the above settings to find some!
           </h3>{" "}
@@ -128,6 +128,11 @@ const Mealsearch = (props: {
       {/* Name Search */}
       <div>
         <input
+          onKeyDown={(e) => {
+            if (e.key == "Enter") {
+              btnnamesearch();
+            }
+          }}
           className="placeholder-gray-900"
           style={{
             margin: "0 1rem 2rem 0",

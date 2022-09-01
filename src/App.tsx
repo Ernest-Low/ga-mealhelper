@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext } from "react";
 import Homepage from "./pages/Homepage";
 import { Recipetype } from "./interfaces";
 import { Routes, Route, useNavigate } from "react-router-dom";
@@ -7,11 +7,13 @@ import randomrecipe from "./modules/randomrecipe";
 import Header from "./modules/Header";
 import Favoritepage from "./pages/Favoritepage";
 import Mealsearch from "./pages/Mealsearch";
+import Mealprep from "./pages/Mealprep";
 
 function App() {
   const [recipe, setrecipe] = useState<Recipetype>();
   const [favs, setfavs] = useState<Recipetype[]>([]);
   const [displaylist, setdisplaylist] = useState<Recipetype[]>([]);
+  const [prep, setprep] = useState<Recipetype>();
 
   const navigate = useNavigate();
 
@@ -23,6 +25,7 @@ function App() {
     console.log("Recipe returned?");
     console.dir(returned);
     setrecipe(returned);
+    setprep(structuredClone(returned));
   };
 
   useEffect(() => {
@@ -31,11 +34,15 @@ function App() {
 
   const displaymeal = () => {
     if (recipe) {
-      return <Mealdisplay recipe={recipe} favbutton={favbutton} />;
+      return (
+        <Mealdisplay recipe={recipe} favbutton={favbutton} setprep={setprep} />
+      );
     } else {
-      <div>
-        <h1>Loading</h1>
-      </div>;
+      return (
+        <div>
+          <h1>Loading</h1>
+        </div>
+      );
     }
   };
 
@@ -48,6 +55,17 @@ function App() {
           favmeals={favmeals}
         />
       );
+    } else {
+      <div>
+        <h1>Loading</h1>
+      </div>;
+    }
+  };
+
+  const displaymealprep = () => {
+    if (prep) {
+      console.log("Init Mealprep");
+      return <Mealprep prep={prep} />;
     } else {
       <div>
         <h1>Loading</h1>
@@ -69,6 +87,7 @@ function App() {
     randomize();
     navigate("/mealdisplay");
   };
+
 
   const favbutton = () => {
     if (recipe) {
@@ -104,7 +123,17 @@ function App() {
         <Route index element={displayhomepage()} />
         <Route path="mealdisplay" element={displaymeal()} />
         <Route path="favorites" element={displayfavs()} />
-        <Route path="search" element={<Mealsearch setrecipe = {setrecipe} displaylist = {displaylist} setdisplaylist = {setdisplaylist}/>} />
+        <Route
+          path="search"
+          element={
+            <Mealsearch
+              setrecipe={setrecipe}
+              displaylist={displaylist}
+              setdisplaylist={setdisplaylist}
+            />
+          }
+        />
+        <Route path="mealprep" element={displaymealprep()} />
       </Routes>
     </div>
   );

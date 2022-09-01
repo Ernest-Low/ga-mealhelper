@@ -1,0 +1,236 @@
+import { Recipetype, Kanbanobj } from "../interfaces";
+import {
+  DropResult,
+  Draggable,
+  DragDropContext,
+  Droppable,
+} from "react-beautiful-dnd";
+import React, { useState, useEffect, useRef } from "react";
+
+const Mealprep = (props: { recipe: Recipetype }) => {
+  const { recipe } = props;
+  const textareas = useRef();
+
+  const [prep, setprep] = useState<Kanbanobj[]>([]);
+  const [ongoing, setongoing] = useState<Kanbanobj[]>([]);
+  const [finished, setfinished] = useState<Kanbanobj[]>([]);
+
+  useEffect(() => {
+    const ingredients: string[] = ["<<Ingredients | Measures>>\n"];
+    for (let i = 0; i < recipe.arringredients.length; i++) {
+      ingredients.push(`${recipe.arringredients[i]} | ${recipe.arrmeasure[i]}`);
+    }
+    const instructions = recipe.strInstructions
+      .split(`\r\n`)
+      .filter((string) => string != "" || string.length > 10);
+
+    const new_ingredients = ingredients.join(`\n`);
+    const pushing = [new_ingredients];
+    instructions.map((text, index) => pushing.push(`${index + 1}: ${text}`));
+    const finalpush = pushing.map((str) => {
+      return { id: str, text: str };
+    });
+    setprep(finalpush);
+    console.dir(finalpush);
+  }, []);
+
+  //   useEffect(() => {
+  //     const changingtextareas : any = document.getElementsByClassName("textareashow");
+  //     console.dir(changingtextareas);
+  //     for (let obj of changingtextareas) {
+  //         obj.style.height = "inherit";
+  //         obj.style.height = `${obj.scrollHeight}px`;
+  //     }
+  //     updatearea(changingtextareas);
+  //   }, [prep]);
+
+  const handleDrop = (droppedItem: DropResult) => {
+    // Ignore drop outside droppable container
+    if (!droppedItem.destination) return;
+    var updatedList = [...prep];
+    // Remove dragged item
+    const [reorderedItem] = updatedList.splice(droppedItem.source.index, 1);
+    // Add dropped item
+    updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
+    // Update State
+    setprep(updatedList);
+  };
+
+  const updatearea = (event: any) => {
+    console.log("updating height");
+    event.target.style.height = "inherit";
+    event.target.style.height = `${event.target.scrollHeight}px`;
+  };
+
+  return (
+    // Overall Page Holder
+    <DragDropContext onDragEnd={handleDrop}>
+      <div
+        style={{
+          margin: "2rem",
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        {/* Prep Holder Box */}
+        <Droppable droppableId={"prepbox"}>
+          {(provided) => (
+            <div
+              className="prepbox"
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                width: "28%",
+                backgroundColor: "#F0FFFF",
+                border: "2px solid #00FFFF",
+              }}
+            >
+              <h2>Preparation</h2>
+              {prep.map((obj, index) => {
+                return (
+                  <Draggable key={obj.id} draggableId={obj.id} index={index}>
+                    {(provided, snapshot) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.dragHandleProps}
+                        {...provided.draggableProps}
+                        isDragging={snapshot.isDragging}
+                      >
+                        <textarea
+                          className="textareashow"
+                          id={obj.id}
+                          onClick={(event) => updatearea(event)}
+                          onBlur={(event) => updatearea(event)}
+                          style={{
+                            whiteSpace: "pre-line",
+                            border: "1px solid #00FFFF",
+                            padding: "0.5rem",
+                            margin: "5%",
+                            width: "90%",
+                            minHeight: "6rem",
+                            overflow: "hidden",
+                            height: "inherit",
+                          }}
+                          defaultValue={obj.text}
+                        ></textarea>
+                      </div>
+                    )}
+                  </Draggable>
+                );
+              })}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </div>
+    </DragDropContext>
+  );
+};
+
+export default Mealprep;
+
+// {/* Ongoing Holder Box */}
+// <Droppable droppableId={"ongoingbox"}>
+// {(provided) => (
+//   <div
+//     className="ongoingbox"
+//     {...provided.droppableProps}
+//     ref={provided.innerRef}
+//     style={{
+//       display: "flex",
+//       flexDirection: "column",
+//       width: "28%",
+//       backgroundColor: "#F0FFFF",
+//       border: "2px solid #00FFFF",
+//     }}
+//   >
+//     <h2>Ongoing</h2>
+//     {ongoing.map((obj, index) => {
+//       return (
+//         <Draggable key={obj.id} draggableId={obj.id} index={index}>
+//           {(provided) => (
+//             <div
+//               ref={provided.innerRef}
+//               {...provided.dragHandleProps}
+//               {...provided.draggableProps}
+//             >
+//               <textarea
+//                 className="textareashow"
+//                 id={obj.id}
+//                 onClick={(event) => updatearea(event)}
+//                 onBlur={(event) => updatearea(event)}
+//                 style={{
+//                   whiteSpace: "pre-line",
+//                   border: "1px solid #00FFFF",
+//                   padding: "0.5rem",
+//                   margin: "5%",
+//                   width: "90%",
+//                   minHeight: "6rem",
+//                   overflow: "hidden",
+//                   height: "inherit",
+//                 }}
+//                 defaultValue={obj.text}
+//               ></textarea>
+//             </div>
+//           )}
+//         </Draggable>
+//       );
+//     })}
+//     {provided.placeholder}
+//   </div>
+// )}
+// </Droppable>
+// {/* Finished Holder Box */}
+// <Droppable droppableId={"finishedbox"}>
+// {(provided) => (
+//   <div
+//     className="finishedbox"
+//     {...provided.droppableProps}
+//     ref={provided.innerRef}
+//     style={{
+//       display: "flex",
+//       flexDirection: "column",
+//       width: "28%",
+//       backgroundColor: "#F0FFFF",
+//       border: "2px solid #00FFFF",
+//     }}
+//   >
+//     <h2>Finished</h2>
+//     {finished.map((obj, index) => {
+//       return (
+//         <Draggable key={obj.id} draggableId={obj.id} index={index}>
+//           {(provided) => (
+//             <div
+//               ref={provided.innerRef}
+//               {...provided.dragHandleProps}
+//               {...provided.draggableProps}
+//             >
+//               <textarea
+//                 className="textareashow"
+//                 id={obj.id}
+//                 onClick={(event) => updatearea(event)}
+//                 onBlur={(event) => updatearea(event)}
+//                 style={{
+//                   whiteSpace: "pre-line",
+//                   border: "1px solid #00FFFF",
+//                   padding: "0.5rem",
+//                   margin: "5%",
+//                   width: "90%",
+//                   minHeight: "6rem",
+//                   overflow: "hidden",
+//                   height: "inherit",
+//                 }}
+//                 defaultValue={obj.text}
+//               ></textarea>
+//             </div>
+//           )}
+//         </Draggable>
+//       );
+//     })}
+//     {provided.placeholder}
+//   </div>
+// )}
+// </Droppable>

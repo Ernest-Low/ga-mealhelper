@@ -26,6 +26,7 @@ const Header = (props: { randomizemeal: () => void; favmeals: () => void }) => {
               border: "none",
               margin: "0px 30px",
               padding: "0.3rem 0.8rem",
+              fontWeight: "bold",
             }}
           >
             Home
@@ -46,6 +47,7 @@ const Header = (props: { randomizemeal: () => void; favmeals: () => void }) => {
               border: "none",
               margin: "0px 30px",
               padding: "0.3rem 0.8rem",
+              fontWeight: "bold",
             }}
           >
             Specific Meal
@@ -60,6 +62,7 @@ const Header = (props: { randomizemeal: () => void; favmeals: () => void }) => {
               border: "none",
               margin: "0px 30px",
               padding: "0.3rem 0.8rem",
+              fontWeight: "bold",
             }}
           >
             Random Meal
@@ -73,9 +76,24 @@ const Header = (props: { randomizemeal: () => void; favmeals: () => void }) => {
               border: "none",
               margin: "0px 30px",
               padding: "0.3rem 0.8rem",
+              fontWeight: "bold",
             }}
           >
             Favorite Meals
+          </button>
+          <button
+            onClick={() => {
+              navigate("/mealprep");
+            }}
+            style={{
+              backgroundColor: "rgba(0,0,0,0)",
+              border: "none",
+              margin: "0px 30px",
+              padding: "0.3rem 0.8rem",
+              fontWeight: "bold",
+            }}
+          >
+            Meal Prep
           </button>
         </div>
       </div>

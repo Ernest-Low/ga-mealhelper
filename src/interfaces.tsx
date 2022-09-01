@@ -80,3 +80,12 @@ export interface ShortJsonmeals {
 export interface ShortJsontype {
   meals: ShortJsonmeals[];
 }
+
+export interface Kanbanobj {
+  id: string;
+  text: string;
+}
+
+export interface DataMap {
+  [key: string]: Kanbanobj[];
+}

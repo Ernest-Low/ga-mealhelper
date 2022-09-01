@@ -23,3 +23,7 @@
   font-family: Yeseva;
   src: url(./fonts/YesevaOne-Regular.ttf);
 }
+
+button:active {
+  transform: translateY(1.2px);
+}
