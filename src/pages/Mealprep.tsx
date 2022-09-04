@@ -31,7 +31,7 @@ const Mealprep = (props: { prep: Recipetype }) => {
     instructions.map((text, index) => pushing.push(`${index + 1}: ${text}`));
 
     const finalpush = pushing.map((str) => {
-      return { id: str, text: str };
+      return { id: uuidv4(), text: str };
     });
 
     const dataclone: DataMap = structuredClone(dataMap);

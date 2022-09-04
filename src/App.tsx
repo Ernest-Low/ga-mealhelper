@@ -25,7 +25,12 @@ function App() {
     console.log("Recipe returned?");
     console.dir(returned);
     setrecipe(returned);
-    setprep(structuredClone(returned));
+    const initialprep = () => {
+      setprep(structuredClone(returned));
+    };
+    useEffect(() => {
+      initialprep();
+    }, []);
   };
 
   useEffect(() => {
@@ -87,7 +92,6 @@ function App() {
     randomize();
     navigate("/mealdisplay");
   };
-
 
   const favbutton = () => {
     if (recipe) {
